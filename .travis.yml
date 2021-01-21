@@ -24,22 +24,54 @@ matrix:
     - jdk: openjdk8
       env:
         - TZ=America/New_York # flips between −05:00 and −04:00
+      arch: amd64   
     - jdk: openjdk11
       env:
         - CHECKERFRAMEWORK=Y
       script:
         - export _JAVA_OPTIONS="-XX:GCTimeLimit=90 -XX:GCHeapFreeLimit=35"
         - ./gradlew --no-parallel --no-daemon --scan -PenableCheckerframework :linq4j:classes :core:classes
+      arch: amd64  
     - jdk: openjdk11
       env:
         - ERRORPRONE=Y
       script:
         - export _JAVA_OPTIONS="-XX:GCTimeLimit=90 -XX:GCHeapFreeLimit=35"
         - ./gradlew --no-parallel --no-daemon --scan -PenableErrorprone classes
+      arch: amd64  
     - jdk: openjdk11
       env:
         - TZ=Pacific/Chatham # flips between +12:45 and +13:45
+      arch: amd64
     - jdk: openjdk15
+      arch: amd64
+    
+    
+    - jdk: openjdk8
+      env:
+        - TZ=America/New_York # flips between −05:00 and −04:00
+      arch: amd64   
+    - jdk: openjdk11
+      env:
+        - CHECKERFRAMEWORK=Y
+      script:
+        - export _JAVA_OPTIONS="-XX:GCTimeLimit=90 -XX:GCHeapFreeLimit=35"
+        - ./gradlew --no-parallel --no-daemon --scan -PenableCheckerframework :linq4j:classes :core:classes
+      arch: ppc64le
+    - jdk: openjdk11
+      env:
+        - ERRORPRONE=Y
+      script:
+        - export _JAVA_OPTIONS="-XX:GCTimeLimit=90 -XX:GCHeapFreeLimit=35"
+        - ./gradlew --no-parallel --no-daemon --scan -PenableErrorprone classes
+      arch: ppc64le  
+    - jdk: openjdk11
+      env:
+        - TZ=Pacific/Chatham # flips between +12:45 and +13:45
+      arch: ppc64le
+    - jdk: openjdk15
+      arch: ppc64le
+      
 branches:
   only:
     - master
